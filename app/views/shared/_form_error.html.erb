@@ -1,0 +1,15 @@
+<% if resource.errors.any? %>
+    <div class="alert alert-danger d-flex align-items-center p-5 mb-10">
+        <i class="ki-duotone ki-shield-tick fs-2hx text-danger me-4"><span class="path1"></span><span class="path2"></span></i>     
+        <div class="d-flex flex-column">
+            <h4 class="mb-1 text-danger">Errors: </h4>
+            <span>
+                <ul> 
+                    <% resource.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li> 
+                    <% end %>
+                </ul>
+            </span>
+        </div>
+    </div>
+<% end %>

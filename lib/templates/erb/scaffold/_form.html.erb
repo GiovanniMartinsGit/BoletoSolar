@@ -1,0 +1,52 @@
+<%% remote = false if remote == nil %>
+<%% id ||= Time.now.to_i %>
+
+
+<%%= form_with(model: <%= model_resource_name %>, data: { turbo: remote  }, html: {class: 'form fv-plugins-bootstrap5 fv-plugins-framework'}) do |form| %>
+    <%%= hidden_field_tag :remote, remote %>
+    <!-- Note: Para adicionar campo obrigatório é só adicionar a classe '.required' no label. -->
+    <div class="card-body border-top p-9">
+        <div class="row">
+            <% attributes.each do |attribute| -%>
+                <% if attribute.password_digest? -%>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <%%= form.label :password, class: "form-label" %>
+                            <%%= form.password_field :password, class: 'form-control form-control-solid' %>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <%%= form.label :password_confirmation, class: "form-label"  %>
+                            <%%= form.password_field :password_confirmation, class: 'form-control form-control-solid' %>
+                        </div>
+                    </div>
+                <% else %>
+                    <% unless attribute.column_name == 'deleted_at' %>
+                        <div class="col-lg-6 col-md-4 col-sm-12 <%= attribute.field_type == :check_box ? 'form-check form-check-custom form-check-solid' : nil %>">
+                            <div class="form-group">
+                                <% if attribute.field_type == :check_box %>
+                                    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-check-input" %>
+                                    <%%= form.label :<%= attribute.column_name %>, class: "form-check-label"   %>
+                                <% else %>
+                                    <%%= form.label :<%= attribute.column_name %>, class: "form-label"  %>
+                                    <% if attribute.reference? %>
+                                        <%%= form.collection_select :<%= attribute.column_name %>, <%= attribute.name.camelize %>.all, :id, :nome, {include_blank: true, include_hidden: false}, class: "form-select form-select-solid" , style: "width: 100%" %>
+                                    <% else %>
+                                        <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-control form-control-solid" %>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-end py-6 px-9">
+        <%% unless remote %>
+            <%%= link_to "<i class='las la-arrow-left'></i> #{t("helpers.links.back")}".html_safe, <%= "#{plural_table_name}" %>_path, :class=> "d-inline-block btn btn-secondary me-2" %>
+        <%% end %>
+        <%%= render "<%= plural_table_name %>/form_actions" %>
+    </div>
+<%% end %>

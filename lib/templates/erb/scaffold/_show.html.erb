@@ -1,0 +1,18 @@
+<%%- model_class = <%= singular_table_name.titleize %> -%>
+
+<%% resource ||= resource %>
+
+
+<%- attributes.each do |attribute| -%>
+<div class="row mb-7">
+  <% unless  attribute.name.downcase == 'deleted_at' %>
+    <label class="col-lg-4 fw-semibold text-muted"><%%= model_class.human_attribute_name(:<%= attribute.name.downcase %>) %> </label>
+    <div class="col-lg-8">
+      <span class="fw-bold fs-6 text-gray-800"><%%= resource.try(:<%= attribute.name.downcase %>) %></span>
+    </div>
+  <% end %>
+</div>
+<% end %>
+<div class="row mb-7 mt-3">
+  <%%= render partial: "audits/table", locals: {audits: resource.try(:own_and_associated_audits), show_collapse: 'show'} %>
+</div>

@@ -1,0 +1,41 @@
+<% if errors.kind_of?(Array) %>
+    <% errors.try(:each) do |error| %>
+        <% if error.try(:full_messages) %>
+            <% error.try(:full_messages).try(:each) do |msg| %>
+                toastify("<%= msg %>");
+            <% end %>
+        <% else %>
+            toastify("<%= msg %>");
+            $('#loader-wrapper').hide();
+        <% end %>
+    <% end %>
+<% else %>
+    <% if errors.try(:full_messages) %>
+        <% errors.try(:full_messages).try(:each) do |msg| %>
+            toastify("<%= msg %>");
+        <% end %>
+    <% end %>
+<% end %>
+
+function toastify(message) {
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toastr-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+
+    toastr.error(message);
+}
+
