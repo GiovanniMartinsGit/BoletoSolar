@@ -1,0 +1,50 @@
+<% remote = false if remote == nil %>
+<% id ||= Time.now.to_i %>
+
+
+<%= form_with(model: morador, data: { turbo: remote  }, html: {class: 'form fv-plugins-bootstrap5 fv-plugins-framework'}) do |form| %>
+    <%= hidden_field_tag :remote, remote %>
+    <!-- Note: Para adicionar campo obrigatório é só adicionar a classe '.required' no label. -->
+    <div class="card-body border-top p-9">
+        <div class="row">
+                            
+                    
+                        <div class="col-lg-6 col-md-4 col-sm-12 ">
+                            <div class="form-group">
+                                
+                                    <%= form.label :nome, class: "form-label"  %>
+                                    
+                                        <%= form.text_field :nome, class: "form-control form-control-solid" %>
+                                    
+                                
+                            </div>
+                        </div>
+                    
+                
+                            
+                    
+                        <div class="col-lg-6 col-md-4 col-sm-12 ">
+                            <div class="form-group">
+                                
+                                    <%= form.label :cpf, class: "form-label"  %>
+                                    
+                                        <%= form.text_field :cpf, class: "form-control form-control-solid" %>
+                                    
+                                
+                            </div>
+                        </div>
+                    
+                
+                            
+                    
+                
+            
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-end py-6 px-9">
+        <% unless remote %>
+            <%= link_to "<i class='las la-arrow-left'></i> #{t("helpers.links.back")}".html_safe, moradores_path, :class=> "d-inline-block btn btn-secondary me-2" %>
+        <% end %>
+        <%= render "moradores/form_actions" %>
+    </div>
+<% end %>

@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  resources :taxas
+  resources :moradores
+
+  resources :leituras do
+    collection do
+      get 'search'
+      post 'datatable'
+    end
+  end
+
+  resources :imoveis do
+    resources :leituras, only: [:new, :create]
+    collection do
+      get 'search'
+      post 'datatable'
+    end
+  end
   resources :audits, only: :show
   match '500', :to => 'errors#internal_server_error', :via => :all
   match '422', :to => 'errors#unacceptable', :via => :all

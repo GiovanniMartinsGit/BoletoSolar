@@ -1,0 +1,18 @@
+<%- model_class=Leitura -%>
+
+<% remote ||=remote %>
+
+ <%= link_to edit_leitura_path(leitura), :class=> 'btn btn-warning me-2', :remote => remote do %>
+    <i class="las la-edit"></i> Editar
+<% end %>
+
+<%= button_to leitura_path(leitura), :remote=> remote,
+    :method => 'delete',
+    :data => { :confirm => "Tem certeza que deseja remover?"},
+    :class => 'btn btn-danger me-2' do %>
+    <i class="las la-trash"></i> Remover
+<% end %>
+
+<%= link_to new_leitura_path, class: "btn btn-primary me-2" do %>
+    <i class="las la-plus"></i> Adicionar 
+<% end %>

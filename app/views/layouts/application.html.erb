@@ -45,13 +45,14 @@
 					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
             <%= yield %>
             <%= turbo_frame_tag "remote_modal", target: "_top" %>
-            <%= render "layouts/partials/footer" %>   
           </div>
 					<!--end:::Main-->
+          <%= render "layouts/partials/footer" %>
         </div>
 				<!--end::Wrapper-->
       </div>
 			<!--end::Page-->
+      
     </div>
     <%= render "layouts/partials/scrolltop" %>    
 

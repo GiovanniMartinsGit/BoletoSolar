@@ -1,0 +1,30 @@
+<%- model_class=Morador -%>
+<% remote ||= remote || params.try(:[], :remote) %>
+
+<% content_for :page_title, t('helpers.titles.edit', :model => model_class.model_name.human(count: 2).titleize) %>
+
+<% content_for :breadcrumb do %>
+    <li class="breadcrumb-item">
+        <%= link_to model_class.model_name.human(count: 2).titleize, moradores_path, class: 'text-muted text-hover-primary' %>
+    </li>
+    <!--begin::Item-->
+    <li class="breadcrumb-item">
+        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+    </li>
+    <!--end::Item-->
+    <li class="breadcrumb-item active" aria-current="page"><%= t('helpers.links.edit') %></li>
+<% end %>
+
+
+<%= error_messages(@morador) %>
+
+<% if remote == true || remote == 'true' %>
+    <%= render "shared/remote_modal", 
+        modal_class: "#{model_class.model_name.human.titleize}", 
+        modal_title: t('helpers.titles.edit', 
+        :model=> model_class.model_name.human.titleize) do %>
+            <%= render "form" , morador: @morador, remote: true  %>
+    <%  end %>
+<% else %>
+    <%= render "form" , morador: @morador %>
+<% end %>

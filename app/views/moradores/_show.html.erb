@@ -1,0 +1,28 @@
+<%- model_class = Morador -%>
+
+<% resource ||= resource %>
+
+
+<div class="row mb-7">
+  
+    <label class="col-lg-4 fw-semibold text-muted"><%= model_class.human_attribute_name(:nome) %> </label>
+    <div class="col-lg-8">
+      <span class="fw-bold fs-6 text-gray-800"><%= resource.try(:nome) %></span>
+    </div>
+  
+</div>
+<div class="row mb-7">
+  
+    <label class="col-lg-4 fw-semibold text-muted"><%= model_class.human_attribute_name(:cpf) %> </label>
+    <div class="col-lg-8">
+      <span class="fw-bold fs-6 text-gray-800"><%= resource.try(:cpf) %></span>
+    </div>
+  
+</div>
+<div class="row mb-7">
+  
+</div>
+
+<div class="row mb-7 mt-3">
+  <%= render partial: "audits/table", locals: {audits: resource.try(:own_and_associated_audits), show_collapse: 'show'} %>
+</div>
