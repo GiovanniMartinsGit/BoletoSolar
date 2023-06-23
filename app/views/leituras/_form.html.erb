@@ -2,12 +2,23 @@
 <% id ||= Time.now.to_i %>
 
 
+
 <%= form_with(model: leitura, data: { turbo: remote  }, html: {class: 'form fv-plugins-bootstrap5 fv-plugins-framework'}) do |form| %>
     <%= hidden_field_tag :remote, remote %>
     <!-- Note: Para adicionar campo obrigatório é só adicionar a classe '.required' no label. -->
     <div class="card-body border-top p-9">
         <div class="row">
                             
+                            
+
+
+                        <div class="col-lg-6 col-md-4 col-sm-12 ">
+                            <div class="form-group">
+                                    <%= form.label :imovel, class: "form-label"  %>
+                                    
+                                    <%= form.select :imovel_id, options_for_select([[ @imovel.id]], selected: @imovel.id), { include_blank: true, disabled: true }, class: "form-select", data: { control: "select2", placeholder: "Select an option" } %>
+                            </div>
+                        </div>
                     
                         <div class="col-lg-6 col-md-4 col-sm-12 ">
                             <div class="form-group">
@@ -34,11 +45,8 @@
                             </div>
                         </div>
                     
-                
-                            
-                    
-                
-            
+                      
+
         </div>
     </div>
     <div class="card-footer d-flex justify-content-end py-6 px-9">

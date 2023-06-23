@@ -12,6 +12,7 @@ class Imovel < ApplicationRecord
     include Searchrable
 
     has_many :leituras, dependent: :destroy
+    belongs_to :morador
     # security (i.e. attr_accessible) ...........................................
         
         

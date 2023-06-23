@@ -95,7 +95,7 @@ class ImoveisController < ApplicationController
         # Never trust parameters from the scary internet, only allow the white list through.
         def imovel_params
             if params[:imovel]
-                    params.require(:imovel).permit(:nome, :endereco, :cep, :deleted_at)
+                    params.require(:imovel).permit(:nome, :endereco, :cep, :morador_id, :deleted_at)
             end
         end
 

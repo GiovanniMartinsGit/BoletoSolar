@@ -10,7 +10,8 @@ class Leitura < ApplicationRecord
     acts_as_paranoid
 
     include Searchrable
-  
+
+    belongs_to :imovel
     # security (i.e. attr_accessible) ...........................................
         
         

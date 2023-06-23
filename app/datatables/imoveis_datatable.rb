@@ -1,7 +1,7 @@
 class ImoveisDatatable
     delegate :params, :h, :t, :link_to, :button_to, :content_tag, 
         :imovel_path, 
-        :edit_imovel_path, to: :@view
+        :edit_imovel_path, :new_imovel_leitura_path, :new_leitura_path, to: :@view
   
     
     def initialize(view)
@@ -24,12 +24,15 @@ class ImoveisDatatable
                 {
                     'index' => (index + 1) + ((page - 1) * per_page),
                                             
-                                            
-                                            
+                            'nome' => column_nome(imovel),
+
+                            'endereco' => column_endereco(imovel),
+
+                            'cep' => column_cep(imovel),
+                            
+                            'morador' => column_morador(imovel),
+
                             'created_at' => column_created_at(imovel),
-                        
-                                            
-                            'updated_at' => column_updated_at(imovel),
                         
                     
                     'opcoes' => column_opcoes(imovel)
@@ -41,16 +44,34 @@ class ImoveisDatatable
                     
                     
                     
+                def column_nome(imovel)
+                    
+                        imovel.try(:nome)
+                    
+                end
+
+                def column_endereco(imovel)
+                    
+                        imovel.try(:endereco)
+                    
+                end
+
+                def column_cep(imovel)
+                    
+                        imovel.try(:cep)
+                    
+                end
+
+                def column_morador(imovel)
+                    
+                  imovel.try(:morador).try(:nome)
+              
+                end
+
+  
                 def column_created_at(imovel)
                     
                         imovel.try(:created_at).try(:to_fs)
-                    
-                end
-            
-                    
-                def column_updated_at(imovel)
-                    
-                        imovel.try(:updated_at).try(:to_fs)
                     
                 end
             
@@ -66,6 +87,10 @@ class ImoveisDatatable
                     content_tag(:i, '', class: 'las la-search')
             end).to_s
 
+            opcoes << (link_to(new_imovel_leitura_path(imovel), method: :get, remote: @remote, class: 'btn btn-icon btn-primary me-2 mb-2', title: 'Visualizar', data: { toggle: 'tooltip', placement: 'top' }) do
+              content_tag(:i, '', class: 'las la-search')
+            end).to_s
+
             opcoes << (link_to(edit_imovel_path(imovel),
                         { remote: @remote, class: 'btn btn-icon btn-warning me-2 mb-2', title: 'Editar',
                         data: { toggle: 'tooltip', placement: 'top' } }) do
@@ -79,6 +104,8 @@ class ImoveisDatatable
                         class: 'btn btn-icon btn-danger me-2 mb-2', title: 'Remover' do
                     content_tag(:i, '', class: 'las la-trash')
                 end).to_s
+
+                
 
             opcoes.html_safe
         end
@@ -116,7 +143,7 @@ class ImoveisDatatable
         end
     
         def sort_column
-            columns = ["id", "created_at", "updated_at"]
+            columns = ["id", "created_at", "nome", "endereco", "cep"]
             columns[params[:order]['0'][:column].to_i]
         end
 

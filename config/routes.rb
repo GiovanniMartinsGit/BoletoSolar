@@ -10,7 +10,13 @@ Rails.application.routes.draw do
   end
 
   resources :imoveis do
-    resources :leituras, only: [:new, :create]
+    resources :leituras, only: [:new, :create] do
+      collection do
+        get 'search'
+        post 'datatable'
+      end
+    end
+
     collection do
       get 'search'
       post 'datatable'

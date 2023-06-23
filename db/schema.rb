@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_21_234616) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_23_201518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -53,7 +53,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_234616) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "morador_id", null: false
     t.index ["deleted_at"], name: "index_imoveis_on_deleted_at"
+    t.index ["morador_id"], name: "index_imoveis_on_morador_id"
   end
 
   create_table "leituras", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -91,5 +93,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_234616) do
     t.index ["deleted_at"], name: "index_taxas_on_deleted_at"
   end
 
+  add_foreign_key "imoveis", "moradores"
   add_foreign_key "leituras", "imoveis"
 end

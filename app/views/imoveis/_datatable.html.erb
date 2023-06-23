@@ -45,9 +45,9 @@
                                     
                         <th><%= model_class.human_attribute_name(:cep) %></th>
                     
+                        <th><%= model_class.human_attribute_name(:morador) %></th>
                                     
-                                <th><%= model_class.human_attribute_name(:created_at) %></th>
-                <th><%= model_class.human_attribute_name(:updated_at) %></th>
+                        <th><%= model_class.human_attribute_name(:created_at) %></th>
                 <th class="text-end min-w-100px"><%= t("helpers.actions") %></th>
             </tr>
         </thead>
@@ -85,19 +85,11 @@
                 },
                 columns: [
                     { "data": "index", "class": "col-md-1 coluna-index" },
-                                            
-                            { "data": "nome" },
-                        	
-                                            
-                            { "data": "endereco" },
-                        	
-                                            
-                            { "data": "cep" },
-                        	
-                                            	
-                    	
+                    { "data": "nome" },
+                    { "data": "endereco" },
+                    { "data": "cep" },
+                    { "data": "morador" },
                     { "data": "created_at" },
-                    { "data": "updated_at" },
                     { "data": "opcoes", "orderable": false }
                 ],
             });

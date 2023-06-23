@@ -47,6 +47,13 @@
                                 
                             </div>
                         </div>
+
+                        <div class="col-lg-6 col-md-4 col-sm-12">
+                          <div class="form-group">
+                            <%= form.label :morador_id, class: "form-label" %>
+                            <%= form.collection_select :morador_id, Morador.all, :id, :nome, {include_blank: true}, class: "form-select", data: { control: "select2" } %>
+                          </div>
+                        </div>
                     
                 
                             
