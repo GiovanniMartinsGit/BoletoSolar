@@ -1,7 +1,7 @@
 class LeiturasController < ApplicationController
     layout 'cruds'
     before_action :set_leitura, only: [:show, :edit, :update, :destroy]
-    before_action :set_imovel, only: [:show, :edit, :update, :destroy]
+    before_action :set_imovel, only: [:new, :create]
 
     # GET /leituras
     def index
@@ -21,8 +21,8 @@ class LeiturasController < ApplicationController
 
     # GET /leituras/new
     def new
-        @imovel = Imovel.find(params[:imovel_id])
         @leitura = Leitura.new(leitura_params)
+        @leitura.imovel = @imovel
     end
 
     # GET /leituras/1/edit
@@ -30,8 +30,8 @@ class LeiturasController < ApplicationController
 
     # POST /leituras
     def create
-        @imovel = Imovel.find(params[:imovel_id])
-        @leitura = Leitura.new(leitura_params)
+      @leitura = Leitura.new(leitura_params)
+      @leitura.imovel = @imovel
         notice = 'Leitura cadastrado(a) com sucesso.'
         respond_to do |format|
             if @leitura.save
@@ -97,7 +97,7 @@ class LeiturasController < ApplicationController
         end
 
         def set_imovel
-          @leitura = Imovel.find(params[:imovel_id])
+          @imovel = Imovel.find(params[:imovel_id])
         end
 
         # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,0 +1,33 @@
+
+<%- model_class=Imovel -%>
+
+<!-- begin::Datatable -->
+<div class="table-responsive">
+  <table class="table align-middle table-row-dashed fs-6 gy-5" style="width:100%" id="table-leituras">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th><%= model_class.human_attribute_name(:leitura_id) %></th>
+        <th><%= model_class.human_attribute_name(:data_leitura) %></th>
+        <th><%= model_class.human_attribute_name(:valor_leitura) %></th>
+        <th><%= model_class.human_attribute_name(:created_at) %></th>
+        <th><%= model_class.human_attribute_name(:updated_at) %></th>
+      </tr>
+    </thead>
+    <tbody class="text-gray-600 fw-semibold">
+      <% @imovel.leituras.each_with_index do |leitura, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= leitura.id %></td>
+          <td><%= leitura.data_leitura %></td>
+          <td><%= leitura.valor_leitura %></td>
+          <td><%= leitura.created_at %></td>
+          <td><%= leitura.updated_at %></td>
+
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<!-- end::Datatable -->

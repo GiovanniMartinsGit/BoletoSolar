@@ -74,7 +74,7 @@ gem 'kaminari'
 gem 'array_enum'
 gem 'auto_increment'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary', '0.12.4'
 gem 'protokoll'
 gem 'seed_migration'
 

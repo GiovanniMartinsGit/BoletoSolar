@@ -40,5 +40,9 @@
 </div>
 
 <div class="row mb-7 mt-3">
+  <%= render partial: "imoveis/leituras_table", locals: { leituras: @leituras } %>
+</div>
+
+<div class="row mb-7 mt-3">
   <%= render partial: "audits/table", locals: {audits: resource.try(:own_and_associated_audits), show_collapse: 'show'} %>
 </div>

@@ -1,0 +1,63 @@
+ <div class="invoice-container">
+    <div class="invoice-header">
+      <h1>Fatura de Energia Elétrica</h1>
+      <p>Boleto Solar</p>
+      <p>Mossoró - RN</p>
+      <p>CEP: 59633-770 </p>
+    </div>
+
+    <div class="invoice-details">
+      <div>
+        <p>Morador: <%= @imovel.morador.nome %></p>
+        <p>Endereço: <%= @imovel.endereco %></p>
+        <p>CEP: <%= @imovel.cep %></p>
+        <p>Leitura mês: <%= @leitura_atual.valor_leitura %> kWh</p>
+      </div>
+      <div>
+        <p>Mês Referente: <%= @imovel.leituras.last.data_leitura.strftime("%m/%y") %></p>
+      </div>
+    </div>
+
+    <div class="invoice-items">
+      <div class="invoice-item">
+        <p class="description">Consumo de Energia Elétrica</p>
+        <p class="amount"><%= @consumo %> kWh</p>
+      </div>
+
+      <div class="invoice-item">
+        <p class="description">Valor do kWh</p>
+        <p class="amount">R$ <%= number_with_precision(Taxa.last.valor_kwh, precision: 2) %></p>
+      </div>
+      <div class="invoice-total">
+        <p class="description">Total:</p>
+        <p class="amount">R$ <%= @total %></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <h1 class="text-center">Histórico de Leituras do Imóvel</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Leitura</th>
+            <th>Consumo</th>
+            <th>Valor do Consumo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @imovel.historico_consumos.order(created_at: :desc).limit(12).each do |consumo| %>
+            <tr>
+              <td><%= consumo.data_consumo.strftime("%m/%Y") %></td>
+              <td><%= consumo.leitura %> kWh </td>
+              <td><%= consumo.consumo %> kWh </td>
+              <td>R$ <%= consumo.valor_consumo %></td>
+
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  

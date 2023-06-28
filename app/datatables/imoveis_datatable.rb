@@ -1,7 +1,7 @@
 class ImoveisDatatable
     delegate :params, :h, :t, :link_to, :button_to, :content_tag, 
         :imovel_path, 
-        :edit_imovel_path, :new_imovel_leitura_path, :new_leitura_path, to: :@view
+        :edit_imovel_path, :new_imovel_leitura_path, :new_leitura_path, :gerar_fatura_imovel_path, to: :@view
   
     
     def initialize(view)
@@ -87,8 +87,8 @@ class ImoveisDatatable
                     content_tag(:i, '', class: 'las la-search')
             end).to_s
 
-            opcoes << (link_to(new_imovel_leitura_path(imovel), method: :get, remote: @remote, class: 'btn btn-icon btn-primary me-2 mb-2', title: 'Visualizar', data: { toggle: 'tooltip', placement: 'top' }) do
-              content_tag(:i, '', class: 'las la-search')
+            opcoes << (link_to(new_imovel_leitura_path(imovel), method: :get, remote: @remote, class: 'btn btn-icon btn-info me-2 mb-2', title: 'Nova Leitura', data: { toggle: 'tooltip', placement: 'top' }) do
+              content_tag(:i, '', class: 'las la-calculator')
             end).to_s
 
             opcoes << (link_to(edit_imovel_path(imovel),
@@ -105,7 +105,9 @@ class ImoveisDatatable
                     content_tag(:i, '', class: 'las la-trash')
                 end).to_s
 
-                
+            opcoes << (link_to(gerar_fatura_imovel_path(imovel, format: :pdf), method: :get, remote: @remote, class: 'btn btn-icon btn-success me-2 mb-2', title: 'Criar Fatura', data: { toggle: 'tooltip', placement: 'top' }) do
+              content_tag(:i, '', class: 'las la-file-invoice-dollar')
+            end).to_s
 
             opcoes.html_safe
         end

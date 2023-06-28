@@ -74,6 +74,37 @@ class ImoveisController < ApplicationController
         end
     end
 
+    def gerar_fatura
+      @imovel = Imovel.find(params[:id])
+      @leitura_atual = @imovel.leitura_mes
+      @consumo = @imovel.consumo_energia
+      @total = @consumo * Taxa.last.valor_kwh
+      
+      # Verificar se já existe um registro de consumo para o mês atual
+      historico_mes_atual = HistoricoConsumo.find_by(imovel_id: @imovel.id, data_consumo: Date.today.beginning_of_month..Date.today.end_of_month)
+
+       # Criar um novo registro apenas se não existir um para o mês atual
+      if historico_mes_atual.nil?
+        HistoricoConsumo.create(
+          imovel_id: @imovel.id,
+          consumo: @consumo,
+          leitura: @leitura_atual.valor_leitura,
+          data_consumo: @leitura_atual.data_leitura,
+          valor_consumo: @total
+        ) 
+      end
+    
+      respond_to do |format|
+        format.html
+        format.pdf do
+          render pdf: "Fatura - #{@imovel.nome}",
+                 template: "imoveis/gerar_fatura",
+                 layout: "layouts/pdf",
+                 formats: [:html]
+        end
+      end
+    end
+
     def datatable
         respond_to do |format|
             format.json { render json: ImoveisDatatable.new(view_context) }

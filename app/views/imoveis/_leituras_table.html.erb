@@ -1,0 +1,14 @@
+<div class="accordion" id="kt_accordion_imoveis_leituras">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="kt_accordion_imoveis_leituras_header_1">
+      <button class="accordion-button fs-4 fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_imoveis_leituras_body_1" aria-expanded="true" aria-controls="kt_accordion_imoveis_leituras_body_1">
+        Leituras
+      </button>
+    </h2>
+    <div id="kt_accordion_imoveis_leituras_body_1" class="accordion-collapse collapse <%%= show_collapse %>" aria-labelledby="kt_accordion_imoveis_leituras_header_1" data-bs-parent="#kt_accordion_imoveis_leituras">
+      <div class="accordion-body">
+        <%= render partial: "imoveis/leituras_datatable" , locals: {leitura: @leituras} %>
+      </div>
+    </div>
+  </div>
+</div>

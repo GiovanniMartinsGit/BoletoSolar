@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_23_201518) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_28_131135) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -44,6 +44,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_23_201518) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["counter_model_name"], name: "index_custom_auto_increments_on_counter_model_name"
+  end
+
+  create_table "historico_consumos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "imovel_id", null: false
+    t.integer "consumo"
+    t.integer "leitura"
+    t.datetime "data_consumo"
+    t.float "valor_consumo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["imovel_id"], name: "index_historico_consumos_on_imovel_id"
   end
 
   create_table "imoveis", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -93,6 +104,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_23_201518) do
     t.index ["deleted_at"], name: "index_taxas_on_deleted_at"
   end
 
+  add_foreign_key "historico_consumos", "imoveis"
   add_foreign_key "imoveis", "moradores"
   add_foreign_key "leituras", "imoveis"
 end

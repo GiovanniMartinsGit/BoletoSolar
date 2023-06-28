@@ -1,0 +1,87 @@
+td {
+  padding: 15px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.invoice-container {
+  width: 800px;
+  margin: 0 auto;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.invoice-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.invoice-header h1 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.invoice-header p {
+  color: #777;
+  margin: 0;
+}
+
+.invoice-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.invoice-details .left {
+  width: 50%;
+}
+
+.invoice-details .right {
+  width: 50%;
+  text-align: right;
+}
+
+.invoice-items {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.invoice-item {
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+  display: flex;
+  flex-basis: 50%;
+}
+
+.invoice-item:last-child {
+  border-bottom: none;
+}
+
+.invoice-item .description {
+  color: #555;
+  font-weight: bold;
+}
+
+.invoice-item .amount {
+  color: #777;
+}
+
+.invoice-total {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.invoice-total .label {
+  font-weight: bold;
+  color: #555;
+}
+
+.invoice-total .value {
+  color: #333;
+}
